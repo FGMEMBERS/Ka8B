@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+  <sim>
+    <model>
+      <livery>
+        <name type="string">Default</name>
+        <texture>ka6.png</texture>
+        <texture-wing>ka6-wings.png</texture-wing>
+      </livery>
+    </model>
+  </sim>
+</PropertyList>

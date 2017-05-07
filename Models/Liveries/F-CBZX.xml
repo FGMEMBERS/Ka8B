@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--based on http://www.rcawsey.co.uk/f-cbzx.jpg-->
+<PropertyList>
+  <sim>
+    <model>
+      <livery>
+        <name type="string">F-CBZX</name>
+        <texture>Liveries/F-CBZX.png</texture>
+        <texture-wing>Liveries/F-CBZX-wing.png</texture-wing>
+      </livery>
+    </model>
+  </sim>
+</PropertyList>

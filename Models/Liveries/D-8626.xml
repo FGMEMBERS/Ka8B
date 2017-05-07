@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--based on http://fsg-letzenberg-malsch.de/wp-content/uploads/2013/12/Ka6CR.png-->
+<PropertyList>
+  <sim>
+    <model>
+      <livery>
+        <name type="string">D-8626</name>
+        <texture>Liveries/D-8626.png</texture>
+        <texture-wing>Liveries/D-8626-wing.png</texture-wing>
+      </livery>
+    </model>
+  </sim>
+</PropertyList>

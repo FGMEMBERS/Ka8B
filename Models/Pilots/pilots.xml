@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>pilots.ac</path> 
+    
+    <animation>
+        <type>select</type>
+        <condition>
+            <property>/sim/model/pilots-enabled</property>
+            <not-equals>
+                <property>/sim/current-view/view-number</property>
+                <value>0</value>
+            </not-equals>
+        </condition>
+        <object-name>pilot</object-name>
+    </animation>
+</PropertyList>

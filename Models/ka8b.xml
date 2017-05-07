@@ -1,0 +1,596 @@
+<?xml version="1.0"?>
+
+<!-- Schleicher ASK 13 Glider  -->
+<!-- Copyright 2010 Patrice Poly -->
+
+<PropertyList>
+
+ <path>ka8b.ac</path>
+
+ <offsets>
+   <x-m>0.</x-m>
+   <y-m>0.</y-m>
+   <z-m>0.</z-m>
+   <pitch-deg>0.0</pitch-deg>
+ </offsets>
+
+  <nasal>
+    <load>
+      var livery_update = aircraft.livery_update.new("Aircraft/Ka6/Models/Liveries", 10);
+      
+        var self = cmdarg();
+
+      var float_0 = self.getNode("sim/multiplay/generic/float[0]", 1);
+      var float_1 = self.getNode("sim/multiplay/generic/float[1]", 1);
+
+      var canopy_door = self.getNode("sim/model/door-positions/canopy/position-norm", 1);
+      var canopy_jettison_door = self.getNode("sim/model/door-positions/canopy_jettison/position-norm", 1);
+      
+      canopy_door.alias(float_0);
+      canopy_jettison_door.alias(float_1);
+    </load>
+
+    <unload>
+      livery_update.stop();
+      canopy_door.unalias();
+      canopy_jettison_door.unalias();
+    </unload>
+  </nasal>
+  
+  <!--LIVERIES-->
+  <animation>
+    <type>material</type>
+     <object-name>body</object-name>
+     <object-name>hstab</object-name>
+     <object-name>elevator</object-name>
+     <object-name>tailskid</object-name>
+
+    <property-base>sim/model/livery</property-base>
+    <texture-prop>texture</texture-prop>
+    <texture>texture.png</texture>
+
+  </animation>
+  <animation>
+    <type>material</type>
+     <object-name>wing</object-name>
+     <object-name>aileronL</object-name>
+     <object-name>aileronR</object-name>
+     <object-name>spoilers</object-name>
+     <object-name>vstab</object-name>
+     <object-name>rudder</object-name>
+
+    <property-base>sim/model/livery</property-base>
+    <texture-prop>texture-wing</texture-prop>
+    <texture>texture.png</texture>
+
+  </animation>
+  <animation>
+    <type>material</type>
+     <object-name>hstab</object-name>
+     <object-name>leftaileron</object-name>
+     <object-name>rightaileron</object-name>
+     <object-name>rudder</object-name>
+
+    <property-base>sim/model/livery</property-base>
+    <texture-prop>texture-wing2</texture-prop>
+    <texture>texture.png</texture>
+
+  </animation>
+  
+ <model>
+	 <path>Interior/interior.xml</path>
+ </model>
+ 
+ 
+ 
+ 
+    <!--GEAR-->
+    <!--Compression-->
+    <animation>
+        <type>translate</type>
+        <object-name>wheelM</object-name>
+        <property>gear/gear[1]/compression-norm</property>
+        <factor>0.05</factor>
+        <axis>
+            <z>1</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>tailskid</object-name>
+        <property>gear/gear[2]/compression-norm</property>
+        <factor>20</factor>
+        <center>
+		 <x-m>2.6429</x-m>
+		 <z-m>-0.55158</z-m>
+             </center>
+        <axis>
+            <y>1</y>
+        </axis>
+    </animation>
+    
+   <model>
+    <path>Pilots/pilots.xml</path>
+  </model>
+  <!--
+  <effect>
+    <inherits-from>Models/Effects/ask13_bumpspec</inherits-from>
+    <object-name>wing</object-name>
+  </effect>
+
+  <effect>
+    <inherits-from>Models/Effects/ask13_bumpspec-2</inherits-from>
+    <object-name>left-aileron</object-name>
+    <object-name>right-aileron</object-name>
+    <object-name>rudder</object-name>
+  </effect>-->
+
+  <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+    <object-name>window.ext</object-name>
+    <object-name>window.cabrio.ext</object-name>
+  </effect>
+  <effect>
+    <inherits-from>Models/Effects/model</inherits-from>
+    <object-name>body</object-name>
+    <object-name>canopy</object-name>
+    <object-name>hstab</object-name>
+    <object-name>wings</object-name>
+    <object-name>spoilers</object-name>
+    <object-name>aileronL</object-name>
+    <object-name>aileronR</object-name>
+    <object-name>vstab</object-name>
+    <object-name>elevator</object-name>
+    <object-name>rudder</object-name>
+     <object-name>tailskid</object-name>
+  </effect>
+    <animation>
+        <type>select</type>
+        <condition>
+            <property>sim/model/cabrio</property>
+        </condition>
+        <object-name>window.cabrio.ext</object-name>
+    </animation>
+    <animation>
+        <type>select</type>
+        <condition>
+            <not>
+                <property>sim/model/cabrio</property>
+            </not>
+        </condition>
+        <object-name>window.ext</object-name>
+    </animation>
+  
+  <!--Canopy-->
+  <animation>
+    <name>canopyfull</name>
+    <object-name>window.ext</object-name>
+    <object-name>window.cabrio.ext</object-name>
+    <object-name>canopy</object-name>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>canopyfull</object-name>
+    <visible>true</visible>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>nasal</command>
+        <script>doors.canopy.toggle();</script>
+      </binding>
+    </action>
+  </animation>
+
+  
+    <animation>
+        <type>translate</type>
+    <object-name>canopyfull</object-name>
+    <property>sim/model/door-positions/canopy/position-norm</property>
+    <interpolation>
+      <entry><ind> 0.0 </ind><dep> 0.0 </dep></entry>
+      <entry><ind> 0.2 </ind><dep> 0.4 </dep></entry>
+      <entry><ind> 1.0 </ind><dep> 0.4 </dep></entry>
+    </interpolation>
+        <axis>
+            <z>1</z>
+        </axis>
+    </animation>
+  
+    <animation>
+        <type>translate</type>
+    <object-name>canopyfull</object-name>
+    <property>sim/model/door-positions/canopy/position-norm</property>
+    <interpolation>
+      <entry><ind> 0.0 </ind><dep> 0.0 </dep></entry>
+      <entry><ind> 0.2 </ind><dep> 0.0 </dep></entry>
+      <entry><ind> 0.4 </ind><dep> 0.7 </dep></entry>
+      <entry><ind> 1.0 </ind><dep> 0.7 </dep></entry>
+    </interpolation>
+        <axis>
+            <y>1</y>
+        </axis>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>canopyfull</object-name>
+        <condition>
+            <property>gear/gear[1]/wow</property>
+        </condition>
+        <property>sim/model/door-positions/canopy/position-norm</property>
+        <interpolation>
+            <entry><ind> 0.0 </ind><dep> 0.0 </dep></entry>
+            <entry><ind> 0.2 </ind><dep> 0.0 </dep></entry>
+            <entry><ind> 0.5 </ind><dep> 0.0 </dep></entry>
+            <entry><ind> 1.0 </ind><dep> -0.6 </dep></entry>
+        </interpolation>
+        <axis>
+            <z>1</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>translate</type>
+        <object-name>canopyfull</object-name>
+        <condition>
+            <not>
+                <property>gear/gear[1]/wow</property>
+            </not>
+        </condition>
+        <property>sim/model/door-positions/canopy/position-norm</property>
+        <interpolation>
+            <entry><ind> 0.0 </ind><dep> 0.0 </dep></entry>
+            <entry><ind> 0.2 </ind><dep> 0.0 </dep></entry>
+            <entry><ind> 0.5 </ind><dep> 0.0 </dep></entry>
+            <entry><ind> 0.6 </ind><dep> -1 </dep></entry>
+            <entry><ind> 1.0 </ind><dep> -100 </dep></entry>
+        </interpolation>
+        <axis>
+            <z>1</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>select</type>
+        <object-name>canopyfull</object-name>
+        <condition>
+            <property>sim/model/canopy-visible</property>
+        </condition>
+    </animation>
+  
+  <!--Canopy handle LEFT-->
+  <!--
+    <animation>
+        <type>slider</type>
+        <object-name>canopyhandle.left1</object-name>
+        <object-name>canopyhandle.left2</object-name>
+        <drag-direction>horizontal</drag-direction>
+        <action>
+            <binding>
+                <condition>
+                    <equals>
+                    <property>sim/model/door-positions/canopy/position-norm</property>
+                    <value>0</value>
+                </equals>
+                </condition>
+                <command>property-adjust</command>
+                <property>controls/canopy/lock-left</property>
+                <factor>-0.1</factor>
+                <min>0</min>
+                <max>1</max>
+                <wrap>0</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>canopyL</tooltip-id>
+                <label>Canopy Lock Left: %2.0f</label>
+                <property>controls/canopy/lock-left</property>
+            </binding>
+        </hovered>
+    </animation>
+    
+    <animation>
+        <type>translate</type>
+        <object-name>canopyhandle.left1</object-name>
+        <object-name>canopyhandle.left2</object-name>
+                <property>controls/canopy/lock-left</property>
+        <factor>0.05</factor>
+        <axis>
+            <x1-m>1.02097</x1-m>
+            <y1-m>-0.2578</y1-m>
+            <z1-m>0.29843</z1-m>
+            <x2-m>1.98815</x2-m>
+            <y2-m>-0.2703</y2-m>
+            <z2-m>0.47223</z2-m>
+        </axis>
+    </animation>-->
+    <!--Canopy JETTISON handle RIGHT-->
+  <!--
+    <animation>
+        <type>slider</type>
+        <object-name>canopyhandle.right1</object-name>
+        <object-name>canopyhandle.right2</object-name>
+        <drag-direction>horizontal</drag-direction>
+        <action>
+            <binding>
+                <condition>
+                    <equals>
+                    <property>sim/model/door-positions/canopy_jettison/position-norm</property>
+                    <value>0</value>
+                </equals>
+                </condition>
+                <command>property-adjust</command>
+                <property>controls/canopy/lock-right</property>
+                <factor>0.1</factor>
+                <min>0</min>
+                <max>1</max>
+                <wrap>0</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>canopyR</tooltip-id>
+                <label>Canopy JETTISON LOCK: %2.0f</label>
+                <property>controls/canopy/lock-right</property>
+            </binding>
+        </hovered>
+    </animation>
+    
+    <animation>
+        <type>translate</type>
+        <object-name>canopyhandle.right1</object-name>
+        <object-name>canopyhandle.right2</object-name>
+                <property>controls/canopy/lock-right</property>
+        <factor>0.05</factor>
+        <axis>
+            <x1-m>1.02097</x1-m>
+            <y1-m>-0.2578</y1-m>
+            <z1-m>0.29843</z1-m>
+            <x2-m>1.98815</x2-m>
+            <y2-m>-0.2703</y2-m>
+            <z2-m>0.47223</z2-m>
+        </axis>
+    </animation>-->
+    
+    <!--Pilot Window--><!--
+    <animation>
+        <type>slider</type>
+        <object-name>windshield.003</object-name>
+        <object-name>windshield.004</object-name>
+        <drag-direction>horizontal</drag-direction>
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>controls/canopy/window-front</property>
+                <factor>-0.1</factor>
+                <min>0</min>
+                <max>1</max>
+                <wrap>0</wrap>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>windowF</tooltip-id>
+                <label>Window Front: %2.0f</label>
+                <property>controls/canopy/window-front</property>
+            </binding>
+        </hovered>
+    </animation>
+    
+    <animation>
+        <type>translate</type>
+        <object-name>windshield.003</object-name>
+        <object-name>windshield.004</object-name>
+                <property>controls/canopy/window-front</property>
+        <factor>0.2</factor>
+        <axis>
+            <x1-m>1.07267</x1-m>
+            <y1-m>-0.28993</y1-m>
+            <z1-m>0.36124</z1-m>
+            <x2-m>1.46487</x2-m>
+            <y2-m>-0.3039</y2-m>
+            <z2-m>0.43211</z2-m>
+        </axis>
+    </animation>-->
+    
+    <!--FLIGHT SURFACES-->
+    
+    <!--SPOILERS-->
+    <animation>
+            <type>rotate</type>
+            <object-name>spoilerL.ac1</object-name>
+            <object-name>spoilerLU</object-name>
+            <object-name>spoilerLD</object-name>
+            <property>surface-positions/speedbrake-pos-norm</property>
+            <factor>-82</factor>
+            <center>
+                    <y-m>-2.35719</y-m>
+                    <z-m>0.49923</z-m>
+            </center>
+            <axis>
+                    <x>1</x>
+                    <y>0</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+    <animation>
+            <type>rotate</type>
+            <object-name>spoilerL.ac2</object-name>
+            <property>surface-positions/speedbrake-pos-norm</property>
+            <factor>-82</factor>
+            <center>
+                    <y-m>-2.99616</y-m>
+                    <z-m>0.53646</z-m>
+            </center>
+            <axis>
+                    <x>1</x>
+                    <y>0</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+    <animation>
+            <type>rotate</type>
+            <object-name>spoilerLU</object-name>
+        <property>surface-positions/speedbrake-pos-norm</property>
+            <factor>82</factor>
+            <center>
+                <y-m>-2.48266</y-m>
+                    <z-m>0.555</z-m>
+            </center>
+            <axis>
+                    <x>1</x>
+                    <y>0</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+    <animation>
+            <type>rotate</type>
+            <object-name>spoilerLD</object-name>
+        <property>surface-positions/speedbrake-pos-norm</property>
+            <factor>82</factor>
+            <center>
+                    <y-m>-2.22977</y-m>
+                    <z-m>0.44131</z-m>
+            </center>
+            <axis>
+                    <x>1</x>
+                    <y>0</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+    <animation>
+            <type>rotate</type>
+            <object-name>spoilerR.ac1</object-name>
+            <object-name>spoilerRU</object-name>
+            <object-name>spoilerRD</object-name>
+            <property>surface-positions/speedbrake-pos-norm</property>
+            <factor>82</factor>
+            <center>
+                    <y-m>2.35719</y-m>
+                    <z-m>0.49923</z-m>
+            </center>
+            <axis>
+                    <x>1</x>
+                    <y>0</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+    <animation>
+            <type>rotate</type>
+            <object-name>spoilerR.ac2</object-name>
+            <property>surface-positions/speedbrake-pos-norm</property>
+            <factor>82</factor>
+            <center>
+                    <y-m>2.99616</y-m>
+                    <z-m>0.53646</z-m>
+            </center>
+            <axis>
+                    <x>1</x>
+                    <y>0</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+    <animation>
+            <type>rotate</type>
+            <object-name>spoilerRU</object-name>
+        <property>surface-positions/speedbrake-pos-norm</property>
+            <factor>-82</factor>
+            <center>
+                <y-m>2.48266</y-m>
+                    <z-m>0.555</z-m>
+            </center>
+            <axis>
+                    <x>1</x>
+                    <y>0</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+    <animation>
+            <type>rotate</type>
+            <object-name>spoilerRD</object-name>
+        <property>surface-positions/speedbrake-pos-norm</property>
+            <factor>-82</factor>
+            <center>
+                    <y-m>2.22977</y-m>
+                    <z-m>0.44131</z-m>
+            </center>
+            <axis>
+                    <x>1</x>
+                    <y>0</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+ 
+    <animation>
+            <type>rotate</type>
+            <object-name>aileronL</object-name>
+            <property>surface-positions/left-aileron-pos-norm</property>
+            <min-deg>-20</min-deg>
+            <max-deg>20</max-deg>
+            <factor>-20</factor>
+            <axis>
+                <x1-m>-1.21638</x1-m>
+                <y1-m>-4.50383</y1-m>
+                <z1-m>0.58006</z1-m>
+                <x2-m>-1.5109</x2-m>
+                <y2-m>-6.74045</y2-m>
+                <z2-m>0.72269</z2-m>
+            </axis>
+    </animation>
+	
+    <animation>
+            <type>rotate</type>
+            <object-name>aileronR</object-name>
+            <property>surface-positions/right-aileron-pos-norm</property>
+            <min-deg>-20</min-deg>
+            <max-deg>20</max-deg>
+            <factor>20</factor>
+            <axis>
+                <x1-m>-1.21638</x1-m>
+                <y1-m>4.50383</y1-m>
+                <z1-m>0.58006</z1-m>
+                <x2-m>-1.5109</x2-m>
+                <y2-m>6.74045</y2-m>
+                <z2-m>0.72269</z2-m>
+            </axis>
+    </animation>
+    
+    <animation>
+            <type>rotate</type>
+            <object-name>elevator</object-name>
+            <property>surface-positions/elevator-pos-norm</property>
+            <min-deg>-20</min-deg>
+            <max-deg>20</max-deg>
+            <factor>-20</factor>
+            <center>
+                    <x-m>2.36366</x-m>
+                    <z-m>0.33402</z-m>
+            </center>
+            <axis>
+                    <x>0</x>
+                    <y>-3.006192</y>
+                    <z>0</z>
+            </axis>
+    </animation>
+    
+    <animation>
+            <type>rotate</type>
+            <object-name>rudder</object-name>
+            <property>surface-positions/rudder-pos-norm</property>
+            <min-deg>-20</min-deg>
+            <max-deg>20</max-deg>
+            <factor>20</factor>
+            <axis>
+                <x1-m>2.73408</x1-m>
+                <y1-m>0.0</y1-m>
+                <z1-m>-0.02057</z1-m>
+                <x2-m>2.7009</x2-m>
+                <y2-m>0.0</y2-m>
+                <z2-m>1.4633</z2-m>
+            </axis>
+    </animation>
+
+ </PropertyList>

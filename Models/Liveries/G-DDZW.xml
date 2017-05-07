@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--based on https://sites.google.com/site/ka6sailplane/_/rsrc/1346438303531/featuredka6/ka6cr-g-ddzw-s-n-6628/2012-08-29_210036.jpg-->
+<PropertyList>
+  <sim>
+    <model>
+      <livery>
+        <name type="string">G-DDZW</name>
+        <texture>Liveries/G-DDZW.png</texture>
+        <texture-wing>Liveries/G-DDZW-wing.png</texture-wing>
+      </livery>
+    </model>
+  </sim>
+</PropertyList>
